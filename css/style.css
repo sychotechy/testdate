@@ -209,8 +209,6 @@ p {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
     opacity: 0;
     pointer-events: none;
     transition: opacity 1.5s ease-in-out;
@@ -242,7 +240,6 @@ p {
     width: 100%;
     text-align: center;
     position: relative;
-    overflow: hidden;
 }
 
 /* ================= TYPEWRITER ================= */
@@ -360,14 +357,25 @@ p {
 .memory-word {
     position: absolute;
     font-family: var(--font-heading);
-    font-size: clamp(0.8rem, 3vw, 1.2rem);
-    color: rgba(255, 255, 255, 0.3);
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    color: rgba(255, 255, 255, 0.6);
     pointer-events: all;
     cursor: pointer;
     transition: all 0.5s ease;
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
     white-space: nowrap;
     z-index: 2;
+}
+
+.bmw-easter-egg {
+    color: rgba(255, 215, 0, 0.8) !important;
+    font-weight: bold;
+    animation: pulseBmw 2s infinite alternate;
+}
+
+@keyframes pulseBmw {
+    0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); opacity: 0.8; }
+    100% { text-shadow: 0 0 20px rgba(255, 215, 0, 1); opacity: 1; }
 }
 
 .memory-word:hover, .memory-word.active {

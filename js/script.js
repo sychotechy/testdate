@@ -335,6 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
         memoryWords.forEach((word) => {
             const el = document.createElement('div');
             el.className = 'memory-word';
+            if (word === "BMW") el.classList.add('bmw-easter-egg');
             el.innerText = word;
             
             // Random initial position
