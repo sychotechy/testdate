@@ -4,9 +4,9 @@
     --accent-color: #800000; /* Deep maroon */
     --text-main: #ffffff;
     --text-dark: #333333;
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
     --font-heading: 'Dancing Script', cursive;
     --font-body: 'Nunito', sans-serif;
 }
@@ -21,6 +21,7 @@
 body, html {
     width: 100%;
     height: 100vh;
+    height: 100dvh;
     font-family: var(--font-body);
     overflow: hidden; /* Prevent scrolling on body, we'll handle it inside pages if needed */
     color: var(--text-main);
@@ -208,14 +209,13 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
+    display: block;
     opacity: 0;
     pointer-events: none;
     transition: opacity 1.5s ease-in-out;
-    padding: 20px;
+    padding: 10vh 20px 10vh 20px;
     overflow-y: auto;
     overflow-x: hidden;
-    flex-direction: column;
 }
 
 .page.active {
@@ -230,8 +230,8 @@ p {
 /* ================= GLASSMORPHISM ================= */
 .glass-container {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 40px;
@@ -240,6 +240,7 @@ p {
     width: 100%;
     text-align: center;
     position: relative;
+    margin: 0 auto;
 }
 
 /* ================= TYPEWRITER ================= */
@@ -440,17 +441,13 @@ p {
     transform: translateY(0);
 }
 
-.image-placeholder {
+.gallery-img {
     width: 100%;
-    height: 200px;
-    background: rgba(255,255,255,0.05);
-    border: 1px dashed rgba(255,255,255,0.3);
+    max-height: 250px;
+    object-fit: cover;
     border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgba(255,255,255,0.5);
-    font-style: italic;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border: 1px solid var(--glass-border);
 }
 
 .caption {
@@ -561,9 +558,7 @@ p {
 @media (max-width: 600px) {
     .glass-container {
         padding: 30px 20px;
-        margin: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin: 0 auto 50px auto;
     }
     
     .elegant-title {
