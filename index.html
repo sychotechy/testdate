@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    
+    <!-- Preconnect to Google Fonts for elegant typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+    
+    <!-- Link to Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <!-- Background Effects Container (Fireflies, particles, floating hearts) -->
+    <div id="background-effects" aria-hidden="true"></div>
+
+    <!-- Cursor Follower for Desktop -->
+    <div id="cursor-sparkle" aria-hidden="true"></div>
+
+    <!-- Music Control Button -->
+    <button id="music-btn" aria-label="Play Music">
+        <span class="icon play-icon">♪</span>
+    </button>
+    <!-- Hidden Audio Elements -->
+    <audio id="bg-music-1" loop src="assets/music/track1.mp3"></audio>
+    <audio id="bg-music-2" loop src="assets/music/track2.mp3"></audio>
+
+    <!-- App Container -->
+    <div id="app">
+        
+        <!-- ================= PAGE ONE: The Ask ================= -->
+        <section id="page-1" class="page active">
+            <div class="glass-container">
+                <div class="typewriter-container" id="p1-typewriter">
+                    <!-- Text will be injected here by JS -->
+                </div>
+                
+                <div class="gif-wrapper hidden" id="p1-gif">
+                    <img src="https://i.postimg.cc/pdNqPxx1/milk-and-mocha-cute.gif" alt="Cute animated illustration">
+                </div>
+                
+                <div class="buttons-container hidden" id="p1-buttons">
+                    <button id="btn-yes" class="btn primary-btn">YES ❤️</button>
+                    <button id="btn-no" class="btn secondary-btn">NO 🙃</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE TWO: The Memories ================= -->
+        <section id="page-2" class="page hidden">
+            <!-- Floating Memories injected by JS -->
+            <div id="floating-memories-container"></div>
+            
+            <div class="glass-container date-card">
+                <h1 class="elegant-title">Our Little World</h1>
+                
+                <div class="date-details">
+                    <div class="detail-item">
+                        <span class="label">Date</span>
+                        <span class="value">11-07-2026</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Time</span>
+                        <span class="value">Afternoon</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Dress Code</span>
+                        <span class="value">Black & White<br><small>OR</small><br>Dark Maroon & Black</span>
+                    </div>
+                </div>
+
+                <div class="image-gallery">
+                    <!-- Image Placeholders -->
+                    <div class="gallery-item">
+                        <div class="image-placeholder">Photo Placeholder</div>
+                        <p class="caption">A beautiful memory</p>
+                    </div>
+                </div>
+
+                <div class="continue-container">
+                    <button id="btn-continue" class="btn primary-btn">Continue ❤️</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE THREE: The Confession ================= -->
+        <section id="page-3" class="page hidden">
+            <div class="glass-container confession-card">
+                <div class="typewriter-container" id="p3-typewriter-1">
+                    <!-- First part of text injected by JS -->
+                </div>
+
+                <div id="p3-custom-text-1" class="custom-text hidden">
+                    <!-- Placeholder for user's own text -->
+                    <p class="placeholder-text">[Insert your reasons why it's good to date a car guy here...]</p>
+                </div>
+
+                <div class="typewriter-container" id="p3-typewriter-2">
+                    <!-- Second part of text injected by JS -->
+                </div>
+
+                <div id="p3-custom-text-2" class="custom-text hidden">
+                    <!-- Placeholder for user's own personal paragraphs -->
+                    <p class="placeholder-text">[Insert more personal paragraphs here...]</p>
+                </div>
+                
+                <div class="gif-wrapper hidden" id="p3-gif">
+                    <img src="https://i.postimg.cc/wTDG30TB/yes.gif" alt="Happy illustration">
+                </div>
+
+                <div class="final-button-container hidden" id="p3-final-btn-container">
+                    <button id="btn-final" class="btn glowing-btn">See you on 11 July? ❤️</button>
+                </div>
+
+                <div class="terms-conditions hidden" id="terms-section">
+                    <h2 class="elegant-title success">Date Confirmed ❤️</h2>
+                    <p class="success-subtitle">You officially made one car guy ridiculously happy.</p>
+                    
+                    <div class="terms-box">
+                        <h3>Terms & Conditions</h3>
+                        <ul>
+                            <li>Unlimited smiles.</li>
+                            <li>Random coffee dates.</li>
+                            <li>Occasional food stealing.</li>
+                            <li>Random drives.</li>
+                            <li>Listening to me talk about BMWs.</li>
+                            <li>Lots of laughter.</li>
+                            <li>Hopefully many memories.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= EASTER EGG PAGE ================= -->
+        <section id="easter-egg-page" class="page hidden">
+            <div class="glass-container easter-egg-card">
+                <h1 class="elegant-title">You found the secret page.</h1>
+                <p>I built this because I wanted to ask you in a way that felt uniquely us.</p>
+                <p>Every floating word...</p>
+                <p>Every animation...</p>
+                <p>Every tiny detail...</p>
+                <p>...reminded me of something we've shared.</p>
+                <p>I hope this made you smile as much as building it made me smile.</p>
+                <div class="glowing-heart">❤️</div>
+                <button id="btn-return" class="btn secondary-btn">Return</button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Link to JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
