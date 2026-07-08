@@ -216,6 +216,8 @@ p {
     transition: opacity 1.5s ease-in-out;
     padding: 20px;
     overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
 }
 
 .page.active {
@@ -250,12 +252,14 @@ p {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
 }
 
 .typewriter-text {
     font-size: 1.5rem;
     white-space: pre-wrap;
     display: inline-block;
+    text-align: center;
 }
 
 .cursor {
@@ -356,12 +360,14 @@ p {
 .memory-word {
     position: absolute;
     font-family: var(--font-heading);
-    font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.2);
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.3);
     pointer-events: all;
     cursor: pointer;
     transition: all 0.5s ease;
-    text-shadow: 0 0 5px rgba(255,255,255,0.1);
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+    z-index: 2;
 }
 
 .memory-word:hover, .memory-word.active {
@@ -373,6 +379,7 @@ p {
 
 .date-card {
     z-index: 5;
+    margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -453,8 +460,10 @@ p {
 .confession-card {
     max-width: 700px;
     padding: 50px;
-    overflow-y: auto;
-    max-height: 90vh;
+    overflow-y: visible; /* Let parent page handle overflow */
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 .confession-card::-webkit-scrollbar {
     width: 5px;
@@ -544,7 +553,9 @@ p {
 @media (max-width: 600px) {
     .glass-container {
         padding: 30px 20px;
-        margin: 10px;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
     
     .elegant-title {
@@ -569,7 +580,7 @@ p {
     }
     
     /* Ensure no button runs around within screen bounds safely */
-    #btn-no {
+    #btn-no, #btn-no-3 {
         margin-top: 10px;
     }
 }

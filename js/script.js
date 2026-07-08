@@ -101,6 +101,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Auto-play on first interaction
+    let hasInteracted = false;
+    function unlockAudio() {
+        if (!hasInteracted && !isPlaying) {
+            currentMusic.play().then(() => {
+                isPlaying = true;
+                musicBtn.innerHTML = '<span class="icon pause-icon">⏸</span>';
+            }).catch(e => console.log("Audio play failed on interaction:", e));
+            hasInteracted = true;
+            document.removeEventListener('click', unlockAudio);
+            document.removeEventListener('touchstart', unlockAudio);
+        }
+    }
+    document.addEventListener('click', unlockAudio);
+    document.addEventListener('touchstart', unlockAudio, {passive: true});
+
+    /* =========================================
+       ADVANCED 3D TILT ANIMATION
+    ========================================= */
+    if (!isMobile) {
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.page.active .glass-container');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                card.style.transform = `perspective(1000px) rotateX(${-y / 30}deg) rotateY(${x / 30}deg) scale3d(1.02, 1.02, 1.02)`;
+                card.style.transition = 'transform 0.1s ease';
+            });
+        });
+        // Reset transform on inactivity/leave
+        setInterval(() => {
+            const cards = document.querySelectorAll('.glass-container');
+            cards.forEach(card => {
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+                card.style.transition = 'transform 1s ease';
+            });
+        }, 2000);
+    }
 
     /* =========================================
        TYPEWRITER UTILITY
@@ -160,46 +199,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // No Button Logic
     const btnNo = document.getElementById('btn-no');
+    const btnNo3 = document.getElementById('btn-no-3'); // Page 3 No Button
     const noTexts = ["Nope", "Nice try 😂", "Illegal", "Access denied", "Think again", "You sure?"];
     
     function runaway(e) {
+        const btn = e.target;
+        if(btn.id !== 'btn-no' && btn.id !== 'btn-no-3') return;
+
         // Prevent default tap behavior if on mobile
         if(e.type === 'touchstart') e.preventDefault();
 
-        const btnWidth = btnNo.offsetWidth;
-        const btnHeight = btnNo.offsetHeight;
+        const btnWidth = btn.offsetWidth;
+        const btnHeight = btn.offsetHeight;
         const maxX = window.innerWidth - btnWidth - 40;
         const maxY = window.innerHeight - btnHeight - 40;
         
         const x = Math.max(20, Math.random() * maxX);
         const y = Math.max(20, Math.random() * maxY);
         
-        btnNo.style.position = 'fixed';
-        btnNo.style.left = `${x}px`;
-        btnNo.style.top = `${y}px`;
+        btn.style.position = 'fixed';
+        btn.style.left = `${x}px`;
+        btn.style.top = `${y}px`;
         
         // Random transformations
         const scale = 0.8 + Math.random() * 0.4; // 0.8 to 1.2
         const rot = (Math.random() - 0.5) * 30; // -15 to 15 deg
         const flip = Math.random() > 0.8 ? 'scaleX(-1)' : '';
-        btnNo.style.transform = `scale(${scale}) rotate(${rot}deg) ${flip}`;
+        btn.style.transform = `scale(${scale}) rotate(${rot}deg) ${flip}`;
         
         // Random opacity
         if (Math.random() > 0.7) {
-            btnNo.style.opacity = '0.6';
+            btn.style.opacity = '0.6';
         } else {
-            btnNo.style.opacity = '1';
+            btn.style.opacity = '1';
         }
         
         // Random text
         if (Math.random() > 0.5) {
-            btnNo.innerText = noTexts[Math.floor(Math.random() * noTexts.length)];
+            btn.innerText = noTexts[Math.floor(Math.random() * noTexts.length)];
         }
     }
 
     btnNo.addEventListener('mouseover', runaway);
     btnNo.addEventListener('touchstart', runaway, {passive: false});
     btnNo.addEventListener('click', runaway); // Just in case they click it
+    
+    if(btnNo3) {
+        btnNo3.addEventListener('mouseover', runaway);
+        btnNo3.addEventListener('touchstart', runaway, {passive: false});
+        btnNo3.addEventListener('click', runaway);
+    }
 
     // Yes Button Logic
     const btnYes = document.getElementById('btn-yes');
@@ -243,6 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
             yesClickCount++;
         } else {
             // Transition to Page 2
+            switchMusic(); // Switch to track 2 for page 2 onwards
             document.body.style.animationDuration = '2s'; // Speed up background
             const p1 = document.getElementById('page-1');
             const p2 = document.getElementById('page-2');
@@ -399,11 +449,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Final Button Confession
     const btnFinal = document.getElementById('btn-final');
     btnFinal.addEventListener('click', () => {
-        // Switch Music
-        switchMusic();
-
         // UI Changes
         btnFinal.style.display = 'none';
+        if(btnNo3) btnNo3.style.display = 'none';
         document.getElementById('p3-gif').classList.remove('hidden');
         
         const terms = document.getElementById('terms-section');
